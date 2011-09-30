@@ -6,18 +6,19 @@
 
   <!-- Parent -->
   <parent>
-    <groupId>org.jboss.shrinkwrap</groupId>
-    <artifactId>shrinkwrap-parent</artifactId>
-    <version>1.0.0-beta-7-SNAPSHOT</version>
-    <relativePath>../pom.xml</relativePath>
+    <groupId>org.jboss</groupId>
+    <artifactId>jboss-parent</artifactId>
+    <version>5</version>
   </parent>
 
   <!-- Model Version -->
   <modelVersion>4.0.0</modelVersion>
 
   <!-- Artifact Configuration -->
-  <artifactId>shrinkwrap-extension-vfs3</artifactId>
-  <name>ShrinkWrap Extension JBoss VFS3</name>
+  <groupId>org.jboss.shrinkwrap.vfs3</groupId>
+  <artifactId>shrinkwrap-vfs3</artifactId>
+  <version>1.0.0-alpha-1-SNAPSHOT</version>
+  <name>ShrinkWrap JBoss VFS3 Extension</name>
   <description>ShrinkWrap Extension for the JBoss Virtual Filesystem 3</description>
 
 
@@ -25,9 +26,11 @@
   <properties>
   
     <!-- Versioning -->
+    <version.org.jboss.shrinkwrap>1.0.0-beta-6</version.org.jboss.shrinkwrap>
     <version.org.jboss_jboss.vfs>3.0.0.CR5</version.org.jboss_jboss.vfs>
     <version.jboss.logging>2.2.0.CR1</version.jboss.logging>
     <version.org.jboss.logmanager>1.2.0.CR1</version.org.jboss.logmanager>
+    <version.org.junit>4.8</version.org.junit>
 
   </properties>
 
@@ -40,12 +43,12 @@
     <dependency>
       <groupId>org.jboss.shrinkwrap</groupId>
       <artifactId>shrinkwrap-api</artifactId>
-      <version>${project.version}</version>
+      <version>${version.org.jboss.shrinkwrap}</version>
     </dependency>
     <dependency>
       <groupId>org.jboss.shrinkwrap</groupId>
       <artifactId>shrinkwrap-impl-base</artifactId>
-      <version>${project.version}</version>
+      <version>${version.org.jboss.shrinkwrap}</version>
       <scope>test</scope>
     </dependency>
 
@@ -56,6 +59,7 @@
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <scope>test</scope>
+      <version>${version.org.junit}</version>
     </dependency>
     
     <!-- org.jboss:jboss-vfs --> 
@@ -93,14 +97,90 @@
 
   </dependencies>
 
+   <!-- SCM -->
+    <scm>
+      <connection>scm:git:git://github.com/shrinkwrap/shrinkwrap-vfs3.git</connection>
+      <developerConnection>scm:git:git@github.com:shrinkwrap/shrinkwrap-vfs3.git</developerConnection>
+      <url>https://github.com/shrinkwrap/shrinkwrap-vfs3</url>
+    </scm>
+
+    <!-- Issues -->
+    <issueManagement>
+      <system>jira</system>
+      <url>http://jira.jboss.com/jira/browse/SHRINKWRAP</url>
+    </issueManagement>
+
+    <!-- Licenses -->
+    <licenses>
+      <license>
+        <name>Apache License, Version 2.0</name>
+        <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      </license>
+    </licenses>
+
   <!-- Build Configuration -->
   <build>
   
     <plugins>
 
+      <!-- Release -->
+      <plugin> 
+        <artifactId>maven-release-plugin</artifactId>
+        <version>2.0</version>
+        <configuration>
+          <autoVersionSubmodules>true</autoVersionSubmodules>
+        </configuration>
+      </plugin>
+
+      <!-- Surefire -->
+      <plugin>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <redirectTestOutputToFile>true</redirectTestOutputToFile>
+          <trimStackTrace>false</trimStackTrace>
+          <printSummary>true</printSummary>
+          <includes>
+            <include>**/*TestCase.java</include>
+            <include>**/*TestSuite.java</include>
+          </includes>
+          <forkMode>always</forkMode>
+        </configuration>
+      </plugin>
     </plugins>
     
   </build>
+
+  <repositories>
+    <repository>
+      <id>jboss-public-repository</id>
+      <name>JBoss Repository</name>
+      <url> https://repository.jboss.org/nexus/content/groups/public</url>
+      <releases>
+        <enabled>true</enabled>
+        <updatePolicy>never</updatePolicy>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>never</updatePolicy>
+      </snapshots>
+    </repository>
+  </repositories>
+
+  <pluginRepositories>
+    <pluginRepository>
+      <id>jboss-public-repository</id>
+      <name>JBoss Repository</name>
+      <url> https://repository.jboss.org/nexus/content/groups/public</url>
+      <releases>
+        <enabled>true</enabled>
+        <updatePolicy>never</updatePolicy>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>never</updatePolicy>
+      </snapshots>
+    </pluginRepository>
+  </pluginRepositories> 
   
 </project>
 
