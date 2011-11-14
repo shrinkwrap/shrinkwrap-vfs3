@@ -17,7 +17,7 @@
   <!-- Artifact Configuration -->
   <groupId>org.jboss.shrinkwrap.vfs3</groupId>
   <artifactId>shrinkwrap-vfs3</artifactId>
-  <version>1.0.0-alpha-1-SNAPSHOT</version>
+  <version>1.0.0-cr-1</version>
   <name>ShrinkWrap JBoss VFS3 Extension</name>
   <description>ShrinkWrap Extension for the JBoss Virtual Filesystem 3</description>
 
